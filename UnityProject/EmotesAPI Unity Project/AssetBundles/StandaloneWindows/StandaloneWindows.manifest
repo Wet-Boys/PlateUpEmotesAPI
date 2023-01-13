@@ -1,0 +1,15 @@
+ManifestFileVersion: 0
+CRC: 151855262
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: morbman
+      Dependencies:
+        Dependency_0: customemotespackage
+        Dependency_1: moisture_animationreplacements
+    Info_1:
+      Name: customemotespackage
+      Dependencies: {}
+    Info_2:
+      Name: moisture_animationreplacements
+      Dependencies: {}

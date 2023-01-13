@@ -15,6 +15,8 @@
     <ItemGroup>
         <ExcludedAssemblyFiles Include="$(ManagedDir)netstandard.dll;$(ManagedDir)System.*" InProject="false" />
         <AssemblyFiles Include="$(ManagedDir)*.dll;$(CoreDir)*.dll;@(Dependencies)" Exclude="@(ExcludedAssemblyFiles)" InProject="false" />
+        <None Remove="assets\morbman" />
+        <EmbeddedResource Include="assets\morbman" />
         <Reference Include="@(AssemblyFiles)" />
     </ItemGroup>
 

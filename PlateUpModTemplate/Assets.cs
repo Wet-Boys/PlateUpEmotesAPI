@@ -17,7 +17,7 @@ namespace EmotesAPI
         /// <param name="assetBundleLocation"></param>
         public static void AddBundle(string assetBundleLocation)
         {
-            using var assetBundleStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"CustomEmotesAPI.{assetBundleLocation}");
+            using var assetBundleStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"PlateUpEmotes.{assetBundleLocation}");
             AssetBundle assetBundle = AssetBundle.LoadFromStream(assetBundleStream);
 
             int index = AssetBundles.Count;
@@ -45,6 +45,7 @@ namespace EmotesAPI
             }
             if (assetName.StartsWith("assets/"))
                 assetName = assetName.Remove(0, "assets/".Length);
+            //Debug.Log($"loading {assetName}      count? {AssetIndices.Count}");
             int index = AssetIndices[assetName];
             return AssetBundles[index].LoadAsset<T>($"assets/{assetName}");
         }

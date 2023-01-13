@@ -21,51 +21,51 @@ public static class Scene_Changed_Patch
     [HarmonyPostfix]
     public static void SceneChanged_Postfix(ref PlayerView __instance)
     {
-        GameObject g = GameObject.Instantiate(Assets.Load<GameObject>("@CustomEmotesAPI_customemotespackage:assets/emotewheel/emotewheel.prefab"));
-        foreach (var item in g.GetComponentsInChildren<TextMeshProUGUI>())
-        {
-            var money = self.moneyText.targetText;
-            item.font = money.font;
-            item.fontMaterial = money.fontMaterial;
-            item.fontSharedMaterial = money.fontSharedMaterial;
-        }
-        g.transform.SetParent(__instance.gameObject.transform);
-        g.transform.localPosition = new Vector3(0, 0, 0);
-        var s = g.AddComponent<EmoteWheel>();
-        foreach (var item in g.GetComponentsInChildren<Transform>())
-        {
-            if (item.gameObject.name.StartsWith("Emote"))
-            {
-                s.gameObjects.Add(item.gameObject);
-            }
-            if (item.gameObject.name.StartsWith("MousePos"))
-            {
-                s.text = item.gameObject;
-            }
-            if (item.gameObject.name == "Center")
-            {
-                s.joy = item.gameObject.GetComponent<Image>();
-            }
-        }
+        //GameObject g = GameObject.Instantiate(Assets.Load<GameObject>("@CustomEmotesAPI_customemotespackage:assets/emotewheel/emotewheel.prefab"));///COME BACK TO THIS?
+        //foreach (var item in g.GetComponentsInChildren<TextMeshProUGUI>())
+        //{
+        //    var money = self.moneyText.targetText;
+        //    item.font = money.font;
+        //    item.fontMaterial = money.fontMaterial;
+        //    item.fontSharedMaterial = money.fontSharedMaterial;
+        //}
+        //g.transform.SetParent(__instance.gameObject.transform);
+        //g.transform.localPosition = new Vector3(0, 0, 0);
+        //var s = g.AddComponent<EmoteWheel>();
+        //foreach (var item in g.GetComponentsInChildren<Transform>())
+        //{
+        //    if (item.gameObject.name.StartsWith("Emote"))
+        //    {
+        //        s.gameObjects.Add(item.gameObject);
+        //    }
+        //    if (item.gameObject.name.StartsWith("MousePos"))
+        //    {
+        //        s.text = item.gameObject;
+        //    }
+        //    if (item.gameObject.name == "Center")
+        //    {
+        //        s.joy = item.gameObject.GetComponent<Image>();
+        //    }
+        //}
 
 
-        if (CustomEmotesAPI.audioContainers.Count == 0)
-        {
-            GameObject audioContainerHolder = new GameObject();
-            audioContainerHolder.name = "Audio Container Holder";
-            UnityEngine.Object.DontDestroyOnLoad(audioContainerHolder);
-            foreach (var item in BoneMapper.startEvents)
-            {
-                GameObject aObject = new GameObject();
-                if (item[0] != "")
-                {
-                    aObject.name = $"{item[0]}_AudioContainer";
-                }
-                var container = aObject.AddComponent<AudioContainer>();
-                aObject.transform.SetParent(audioContainerHolder.transform);
-                CustomEmotesAPI.audioContainers.Add(aObject);
-            }
-        }
+        //if (CustomEmotesAPI.audioContainers.Count == 0)
+        //{
+        //    GameObject audioContainerHolder = new GameObject();
+        //    audioContainerHolder.name = "Audio Container Holder";
+        //    UnityEngine.Object.DontDestroyOnLoad(audioContainerHolder);
+        //    foreach (var item in BoneMapper.startEvents)
+        //    {
+        //        GameObject aObject = new GameObject();
+        //        if (item[0] != "")
+        //        {
+        //            aObject.name = $"{item[0]}_AudioContainer";
+        //        }
+        //        var container = aObject.AddComponent<AudioContainer>();
+        //        aObject.transform.SetParent(audioContainerHolder.transform);
+        //        CustomEmotesAPI.audioContainers.Add(aObject);
+        //    }
+        //}
     }
 }
 internal static class AnimationReplacements
@@ -78,97 +78,83 @@ internal static class AnimationReplacements
     internal static bool setup = false;
     internal static void EnemyArmatures()
     {
-        Import("RoR2/Base/Brother/BrotherBody.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/brother.prefab");
-        Import("RoR2/Base/ClayBruiser/ClayBruiserBody.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/templar.prefab");
-
-        Import("RoR2/DLC1/AcidLarva/AcidLarvaBody.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/enemies/AcidLarva1.prefab");
-        Import("RoR2/Base/Titan/TitanGoldBody.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/enemies/Aurelionite.prefab");
-        Import("RoR2/Base/Beetle/BeetleGuardBody.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/enemies/Beetle guard.prefab");
-        Import("RoR2/Base/Beetle/BeetleQueen2Body.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/enemies/beetle queen1.prefab");
-
-        Import("RoR2/DLC1/ClayGrenadier/ClayGrenadierBody.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/enemies/claygrenadier.prefab");
-        Import("RoR2/Base/Bison/BisonBody.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/enemies/bison.prefab");
-        //Import("RoR2/Base/Bell/BellBody.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/enemies/brass contraption2.prefab");
-        Import("RoR2/DLC1/FlyingVermin/FlyingVerminBody.prefab", "@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/enemies/flyingvermin1.prefab");
-
-
-        //CustomEmotesAPI.ImportArmature(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Beetle/BeetleBody.prefab").WaitForCompletion(), Assets.Load<GameObject>("@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/beetle.prefab"));
+        Import(CustomEmotesAPI.playerPrefab, "ඞ fuck you ඞ:assets/morbman.prefab");
     }
-    internal static void Import(string prefab, string skeleton)
+    internal static void Import(GameObject go, string skeleton)
     {
-        CustomEmotesAPI.ImportArmature(Addressables.LoadAssetAsync<GameObject>(prefab).WaitForCompletion(), Assets.Load<GameObject>(skeleton));
+        CustomEmotesAPI.ImportArmature(go, Assets.Load<GameObject>(skeleton));
     }
     internal static void ChangeAnims()
     {
-        On.RoR2.SurvivorCatalog.Init += (orig) =>
-        {
-            orig();
-            if (!setup)
-            {
-                setup = true;
-                ApplyAnimationStuff(RoR2Content.Survivors.Croco, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/acrid.prefab");
+        //On.RoR2.SurvivorCatalog.Init += (orig) =>///COME BACK TO THIS?
+        //{
+        //    orig();
+        //    if (!setup)
+        //    {
+        //        setup = true;
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Croco, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/acrid.prefab");
 
-                ApplyAnimationStuff(RoR2Content.Survivors.Mage, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/artificer.prefab");
-                RoR2Content.Survivors.Mage.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .9f;
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Mage, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/artificer.prefab");
+        //        RoR2Content.Survivors.Mage.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .9f;
 
-                ApplyAnimationStuff(RoR2Content.Survivors.Captain, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/captain.prefab");
-                RoR2Content.Survivors.Captain.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1.1f;
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Captain, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/captain.prefab");
+        //        RoR2Content.Survivors.Captain.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1.1f;
 
-                ApplyAnimationStuff(RoR2Content.Survivors.Engi, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/engi.prefab");
-                RoR2Content.Survivors.Engi.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1f;
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Engi, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/engi.prefab");
+        //        RoR2Content.Survivors.Engi.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1f;
 
-                ApplyAnimationStuff(RoR2Content.Survivors.Loader, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/loader.prefab");
-                RoR2Content.Survivors.Loader.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1.2f;
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Loader, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/loader.prefab");
+        //        RoR2Content.Survivors.Loader.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1.2f;
 
-                ApplyAnimationStuff(RoR2Content.Survivors.Merc, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/merc.prefab");
-                RoR2Content.Survivors.Merc.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .95f;
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Merc, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/merc.prefab");
+        //        RoR2Content.Survivors.Merc.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .95f;
 
-                ApplyAnimationStuff(RoR2Content.Survivors.Toolbot, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/mult1.prefab");
-                RoR2Content.Survivors.Toolbot.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1.5f;
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Toolbot, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/mult1.prefab");
+        //        RoR2Content.Survivors.Toolbot.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1.5f;
 
-                ApplyAnimationStuff(RoR2Content.Survivors.Treebot, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/rex.prefab");
-
-
-                ApplyAnimationStuff(RoR2Content.Survivors.Commando, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/commandoFixed.prefab");
-                RoR2Content.Survivors.Commando.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .85f;
-
-                ApplyAnimationStuff(RoR2Content.Survivors.Huntress, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/huntress2022.prefab");
-                RoR2Content.Survivors.Huntress.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .9f;
-
-                ApplyAnimationStuff(RoR2Content.Survivors.Bandit2, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/bandit.prefab");
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Treebot, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/rex.prefab");
 
 
-                ApplyAnimationStuff(SurvivorCatalog.FindSurvivorDefFromBody(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidSurvivorBody.prefab").WaitForCompletion()), "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/voidsurvivor.prefab");
-                SurvivorCatalog.FindSurvivorDefFromBody(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidSurvivorBody.prefab").WaitForCompletion()).bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .85f;
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Commando, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/commandoFixed.prefab");
+        //        RoR2Content.Survivors.Commando.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .85f;
 
-                ApplyAnimationStuff(SurvivorCatalog.FindSurvivorDefFromBody(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Railgunner/RailgunnerBody.prefab").WaitForCompletion()), "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/railgunner.prefab");
-                SurvivorCatalog.FindSurvivorDefFromBody(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Railgunner/RailgunnerBody.prefab").WaitForCompletion()).bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1.05f;
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Huntress, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/huntress2022.prefab");
+        //        RoR2Content.Survivors.Huntress.bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .9f;
 
-                ApplyAnimationStuff(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Heretic/HereticBody.prefab").WaitForCompletion(), "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/heretricburried.prefab", 3);//this works
+        //        ApplyAnimationStuff(RoR2Content.Survivors.Bandit2, "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/bandit.prefab");
+
+
+        //        ApplyAnimationStuff(SurvivorCatalog.FindSurvivorDefFromBody(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidSurvivorBody.prefab").WaitForCompletion()), "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/voidsurvivor.prefab");
+        //        SurvivorCatalog.FindSurvivorDefFromBody(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidSurvivorBody.prefab").WaitForCompletion()).bodyPrefab.GetComponentInChildren<BoneMapper>().scale = .85f;
+
+        //        ApplyAnimationStuff(SurvivorCatalog.FindSurvivorDefFromBody(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Railgunner/RailgunnerBody.prefab").WaitForCompletion()), "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/railgunner.prefab");
+        //        SurvivorCatalog.FindSurvivorDefFromBody(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Railgunner/RailgunnerBody.prefab").WaitForCompletion()).bodyPrefab.GetComponentInChildren<BoneMapper>().scale = 1.05f;
+
+        //        ApplyAnimationStuff(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Heretic/HereticBody.prefab").WaitForCompletion(), "@CustomEmotesAPI_customemotespackage:assets/animationreplacements/heretricburried.prefab", 3);//this works
 
 
 
                 EnemyArmatures();
 
-                //CustomEmotesAPI.ImportArmature(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherBody.prefab").WaitForCompletion(), Assets.Load<GameObject>("@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/brother.prefab"));
-                //CustomEmotesAPI.ImportArmature(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherHurtBody.prefab").WaitForCompletion(), Assets.Load<GameObject>("@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/brother.prefab"));
+        //        //CustomEmotesAPI.ImportArmature(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherBody.prefab").WaitForCompletion(), Assets.Load<GameObject>("@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/brother.prefab"));
+        //        //CustomEmotesAPI.ImportArmature(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherHurtBody.prefab").WaitForCompletion(), Assets.Load<GameObject>("@CustomEmotesAPI_enemyskeletons:assets/myprioritiesarestraightnt/brother.prefab"));
 
-                //foreach (var item in SurvivorCatalog.allSurvivorDefs) //probably don't need this
-                //{
-                //    if (item.bodyPrefab.name == "RobPaladinBody" && Settings.Paladin.Value)
-                //    {
-                //        var skele = Assets.Load<GameObject>("@CustomEmotesAPI_fineilldoitmyself:assets/fineilldoitmyself/animPaladin.prefab");
-                //        CustomEmotesAPI.ImportArmature(item.bodyPrefab, skele);
-                //        skele.GetComponentInChildren<BoneMapper>().scale = 1.5f;
-                //    }
-                //}
-            }
-        };
+        //        //foreach (var item in SurvivorCatalog.allSurvivorDefs) //probably don't need this
+        //        //{
+        //        //    if (item.bodyPrefab.name == "RobPaladinBody" && Settings.Paladin.Value)
+        //        //    {
+        //        //        var skele = Assets.Load<GameObject>("@CustomEmotesAPI_fineilldoitmyself:assets/fineilldoitmyself/animPaladin.prefab");
+        //        //        CustomEmotesAPI.ImportArmature(item.bodyPrefab, skele);
+        //        //        skele.GetComponentInChildren<BoneMapper>().scale = 1.5f;
+        //        //    }
+        //        //}
+        //    }
+        //};
     }
-    internal static void ApplyAnimationStuff(SurvivorDef index, string resource, int pos = 0)
-    {
-        ApplyAnimationStuff(index.bodyPrefab, resource, pos);
-    }
+    //internal static void ApplyAnimationStuff(SurvivorDef index, string resource, int pos = 0)
+    //{
+    //    ApplyAnimationStuff(index.bodyPrefab, resource, pos);
+    //}
     internal static void ApplyAnimationStuff(GameObject bodyPrefab, string resource, int pos = 0)
     {
         GameObject animcontroller = Assets.Load<GameObject>(resource);
@@ -220,7 +206,6 @@ internal static class AnimationReplacements
             Debug.Log($"EmoteAPI: Had trouble setting emote skeletons parent: {e}");
             throw;
         }
-
         SkinnedMeshRenderer smr1;
         SkinnedMeshRenderer smr2;
         try
@@ -290,10 +275,10 @@ internal static class AnimationReplacements
         }
         try
         {
-            var nuts = Assets.Load<GameObject>("@CustomEmotesAPI_customemotespackage:assets/animationreplacements/bandit.prefab");
-            float banditScale = Vector3.Distance(nuts.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.Head).position, nuts.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.LeftFoot).position);
-            float currScale = Vector3.Distance(animcontroller.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.Head).position, animcontroller.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.LeftFoot).position);
-            test.scale = currScale / banditScale;
+            //var nuts = Assets.Load<GameObject>("@CustomEmotesAPI_customemotespackage:assets/animationreplacements/bandit.prefab");
+            //float banditScale = Vector3.Distance(nuts.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.Head).position, nuts.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.LeftFoot).position);
+            //float currScale = Vector3.Distance(animcontroller.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.Head).position, animcontroller.GetComponentInChildren<Animator>().GetBoneTransform(HumanBodyBones.LeftFoot).position);
+            //test.scale = currScale / banditScale;
             test.model = bodyPrefab.GetComponent<PlayerView>().transform.gameObject;
         }
         catch (Exception e)
@@ -537,7 +522,7 @@ public class BoneMapper : MonoBehaviour
                 {
                     if (!currentClip.syncronizeAudio)
                     {
-                        AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], this.gameObject);
+                        //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                     }
                     audioObjects[currentClip.syncPos].transform.localPosition = new Vector3(0, -10000, 0);
 
@@ -548,7 +533,7 @@ public class BoneMapper : MonoBehaviour
                         {
                             item.audioObjects[currentClip.syncPos].transform.localPosition = new Vector3(0, -10000, 0);
                         }
-                        AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);
+                        //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);///COME BACK TO THIS?
                     }
                 }
                 if (uniqueSpot != -1 && CustomAnimationClip.uniqueAnimations[currentClip.syncPos][uniqueSpot])
@@ -653,7 +638,7 @@ public class BoneMapper : MonoBehaviour
                 }
                 else
                 {
-                    AkSoundEngine.PostEvent(startEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);
+                    //AkSoundEngine.PostEvent(startEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);///COME BACK TO THIS?
                 }
             }
             else if (!currentClip.syncronizeAudio)
@@ -665,7 +650,7 @@ public class BoneMapper : MonoBehaviour
                 }
                 else
                 {
-                    AkSoundEngine.PostEvent(startEvents[currentClip.syncPos][currEvent], this.gameObject);
+                    //AkSoundEngine.PostEvent(startEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                 }
             }
             audioObjects[currentClip.syncPos].transform.localPosition = Vector3.zero;
@@ -727,31 +712,31 @@ public class BoneMapper : MonoBehaviour
             overrideMoveSpeed = false;
             if (parentGameObject && !preserveParent)
             {
-                Vector3 OHYEAHHHHHH = transform.parent.GetComponent<CharacterModel>().body.gameObject.transform.position;
-                OHYEAHHHHHH = (TeleportHelper.FindSafeTeleportDestination(transform.parent.GetComponent<CharacterModel>().body.gameObject.transform.position, transform.parent.GetComponent<CharacterModel>().body, RoR2Application.rng)) ?? OHYEAHHHHHH;
-                Vector3 result = OHYEAHHHHHH;
-                RaycastHit raycastHit = default(RaycastHit);
-                Ray ray = new Ray(OHYEAHHHHHH + Vector3.up * 2f, Vector3.down);
-                float maxDistance = 4f;
-                if (Physics.SphereCast(ray, transform.parent.GetComponent<CharacterModel>().body.radius, out raycastHit, maxDistance, LayerIndex.world.mask))
-                {
-                    result.y = ray.origin.y - raycastHit.distance;
-                }
-                float bodyPrefabFootOffset = Util.GetBodyPrefabFootOffset(bodyPrefab);
-                result.y += bodyPrefabFootOffset;
-                //CapsuleCollider capsule = transform.parent.GetComponent<CharacterModel>().body.gameObject.GetComponent<CapsuleCollider>();
-                if (!useSafePositionReset/* && capsule*/)
-                {
-                    Rigidbody rigidbody = transform.parent.GetComponent<Rigidbody>();
-                    rigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.VelocityChange);
-                    //transform.parent.GetComponent<PlayerView>().gameObject.transform.position += new Vector3(.1f, 2, .1f);
-                    //transform.parent.GetComponent<PlayerView>().transform.position += new Vector3(0, 10, 0);
-                }
-                else
-                {
-                    transform.parent.transform.position = result;
-                    //transform.parent.GetComponent<CharacterModel>().body.GetComponent<PlayerView>().modelBaseTransform.position = result;
-                }
+                //Vector3 OHYEAHHHHHH = transform.parent.GetComponent<CharacterModel>().body.gameObject.transform.position;///COME BACK TO THIS?
+                //OHYEAHHHHHH = (TeleportHelper.FindSafeTeleportDestination(transform.parent.GetComponent<CharacterModel>().body.gameObject.transform.position, transform.parent.GetComponent<CharacterModel>().body, RoR2Application.rng)) ?? OHYEAHHHHHH;
+                //Vector3 result = OHYEAHHHHHH;
+                //RaycastHit raycastHit = default(RaycastHit);
+                //Ray ray = new Ray(OHYEAHHHHHH + Vector3.up * 2f, Vector3.down);
+                //float maxDistance = 4f;
+                //if (Physics.SphereCast(ray, transform.parent.GetComponent<CharacterModel>().body.radius, out raycastHit, maxDistance, LayerIndex.world.mask))
+                //{
+                //    result.y = ray.origin.y - raycastHit.distance;
+                //}
+                //float bodyPrefabFootOffset = Util.GetBodyPrefabFootOffset(bodyPrefab);
+                //result.y += bodyPrefabFootOffset;
+                ////CapsuleCollider capsule = transform.parent.GetComponent<CharacterModel>().body.gameObject.GetComponent<CapsuleCollider>();
+                //if (!useSafePositionReset/* && capsule*/)
+                //{
+                //    Rigidbody rigidbody = transform.parent.GetComponent<Rigidbody>();
+                //    rigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.VelocityChange);
+                //    //transform.parent.GetComponent<PlayerView>().gameObject.transform.position += new Vector3(.1f, 2, .1f);
+                //    //transform.parent.GetComponent<PlayerView>().transform.position += new Vector3(0, 10, 0);
+                //}
+                //else
+                //{
+                //    transform.parent.transform.position = result;
+                //    //transform.parent.GetComponent<CharacterModel>().body.GetComponent<PlayerView>().modelBaseTransform.position = result;
+                //}
                 parentGameObject = null;
             }
             try
@@ -1011,16 +996,16 @@ public class BoneMapper : MonoBehaviour
     }
     void SetRTPCInDimming(float closestDimmingSource)
     {
-        if (closestDimmingSource < 20f && Settings.DimmingSpheres.Value && Settings.EmotesVolume.Value > 0)
-        {
-            Current_MSX = Mathf.Lerp(Current_MSX, (closestDimmingSource / 20f) * CustomEmotesAPI.Actual_MSX, Time.deltaTime * 3);
-            AkSoundEngine.SetRTPCValue("Volume_MSX", Current_MSX);
-        }
-        else if (Current_MSX != CustomEmotesAPI.Actual_MSX)
-        {
-            Current_MSX = Mathf.Lerp(Current_MSX, CustomEmotesAPI.Actual_MSX, Time.deltaTime * 3);
-            AkSoundEngine.SetRTPCValue("Volume_MSX", Current_MSX);
-        }
+        //if (closestDimmingSource < 20f && Settings.DimmingSpheres.Value && Settings.EmotesVolume.Value > 0)///COME BACK TO THIS?
+        //{
+        //    Current_MSX = Mathf.Lerp(Current_MSX, (closestDimmingSource / 20f) * CustomEmotesAPI.Actual_MSX, Time.deltaTime * 3);
+        //    AkSoundEngine.SetRTPCValue("Volume_MSX", Current_MSX);
+        //}
+        //else if (Current_MSX != CustomEmotesAPI.Actual_MSX)
+        //{
+        //    Current_MSX = Mathf.Lerp(Current_MSX, CustomEmotesAPI.Actual_MSX, Time.deltaTime * 3);
+        //    AkSoundEngine.SetRTPCValue("Volume_MSX", Current_MSX);
+        //}
     }
     void LocalFunctions()
     {
@@ -1030,7 +1015,7 @@ public class BoneMapper : MonoBehaviour
         {
             if ((attacking && currentClip.stopOnAttack) || (moving && currentClip.stopOnMove))
             {
-                CustomEmotesAPI.PlayAnimation("none");
+                //CustomEmotesAPI.PlayAnimation("none");///COME BACK TO THIS?
             }
         }
         catch (Exception)
@@ -1041,38 +1026,38 @@ public class BoneMapper : MonoBehaviour
     {
         try
         {
-            if (!CustomEmotesAPI.localMapper)
-            {
-                var body = NetworkUser.readOnlyLocalPlayersList[0].master?.GetBody();
-                if (body.gameObject.GetComponent<PlayerView>().transform == transform.parent)
-                {
-                    CustomEmotesAPI.localMapper = this;
+            //if (!CustomEmotesAPI.localMapper)///COME BACK TO THIS?
+            //{
+            //    var body = NetworkUser.readOnlyLocalPlayersList[0].master?.GetBody();
+            //    if (body.gameObject.GetComponent<PlayerView>().transform == transform.parent)
+            //    {
+            //        CustomEmotesAPI.localMapper = this;
 
-                    local = true;
+            //        local = true;
 
 
-                    //GameObject g = new GameObject();
-                    //g.name = "AudioContainer";
+            //        //GameObject g = new GameObject();
+            //        //g.name = "AudioContainer";
 
-                    //if (CustomEmotesAPI.audioContainers.Count == 0)
-                    //{
-                    //    GameObject audioContainerHolder = new GameObject();
-                    //    audioContainerHolder.name = "Audio Container Holder";
-                    //    UnityEngine.Object.DontDestroyOnLoad(audioContainerHolder);
-                    //    foreach (var item in BoneMapper.startEvents)
-                    //    {
-                    //        GameObject aObject = new GameObject();
-                    //        if (item[0] != "")
-                    //        {
-                    //            aObject.name = $"{item[0]}_AudioContainer";
-                    //        }
-                    //        var container = aObject.AddComponent<AudioContainer>();
-                    //        aObject.transform.SetParent(audioContainerHolder.transform);
-                    //        CustomEmotesAPI.audioContainers.Add(aObject);
-                    //    }
-                    //}
-                }
-            }
+            //        //if (CustomEmotesAPI.audioContainers.Count == 0)
+            //        //{
+            //        //    GameObject audioContainerHolder = new GameObject();
+            //        //    audioContainerHolder.name = "Audio Container Holder";
+            //        //    UnityEngine.Object.DontDestroyOnLoad(audioContainerHolder);
+            //        //    foreach (var item in BoneMapper.startEvents)
+            //        //    {
+            //        //        GameObject aObject = new GameObject();
+            //        //        if (item[0] != "")
+            //        //        {
+            //        //            aObject.name = $"{item[0]}_AudioContainer";
+            //        //        }
+            //        //        var container = aObject.AddComponent<AudioContainer>();
+            //        //        aObject.transform.SetParent(audioContainerHolder.transform);
+            //        //        CustomEmotesAPI.audioContainers.Add(aObject);
+            //        //    }
+            //        //}
+            //    }
+            //}
         }
         catch (Exception)
         {
@@ -1120,7 +1105,7 @@ public class BoneMapper : MonoBehaviour
                     {
                         if (!currentClip.syncronizeAudio)
                         {
-                            AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], this.gameObject);
+                            //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                         }
                         audioObjects[currentClip.syncPos].transform.localPosition = new Vector3(0, -10000, 0);
 
@@ -1130,7 +1115,7 @@ public class BoneMapper : MonoBehaviour
                             {
                                 item.audioObjects[currentClip.syncPos].transform.localPosition = new Vector3(0, -10000, 0);
                             }
-                            AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);
+                            //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);///COME BACK TO THIS?
                         }
                     }
                     prevClip = currentClip;
@@ -1233,12 +1218,12 @@ public class BoneMapper : MonoBehaviour
             }
         }
         if (currentEmoteSpot.GetComponent<EmoteLocation>().owner.worldProp)
-        {
-            new SyncSpotJoinedToHost(transform.parent.GetComponent<CharacterModel>().body.GetComponent<NetworkIdentity>().netId, currentEmoteSpot.transform.parent.GetComponent<NetworkIdentity>().netId, true, spot).Send(R2API.Networking.NetworkDestination.Server);
+        {///COME BACK TO THIS?
+            //new SyncSpotJoinedToHost(transform.parent.GetComponent<CharacterModel>().body.GetComponent<NetworkIdentity>().netId, currentEmoteSpot.transform.parent.GetComponent<NetworkIdentity>().netId, true, spot).Send(R2API.Networking.NetworkDestination.Server);
         }
         else
-        {
-            new SyncSpotJoinedToHost(transform.parent.GetComponent<CharacterModel>().body.GetComponent<NetworkIdentity>().netId, currentEmoteSpot.transform.parent.parent.GetComponent<CharacterModel>().body.GetComponent<NetworkIdentity>().netId, false, spot).Send(R2API.Networking.NetworkDestination.Server);
+        {///COME BACK TO THIS?
+            //new SyncSpotJoinedToHost(transform.parent.GetComponent<CharacterModel>().body.GetComponent<NetworkIdentity>().netId, currentEmoteSpot.transform.parent.parent.GetComponent<CharacterModel>().body.GetComponent<NetworkIdentity>().netId, false, spot).Send(R2API.Networking.NetworkDestination.Server);
         }
     }
     public void RemoveProp(int propPos)
@@ -1304,7 +1289,7 @@ public class BoneMapper : MonoBehaviour
             {
                 if (!currentClip.syncronizeAudio)
                 {
-                    AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], this.gameObject);
+                    //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                 }
                 audioObjects[currentClip.syncPos].transform.localPosition = new Vector3(0, -10000, 0);
 
@@ -1314,9 +1299,9 @@ public class BoneMapper : MonoBehaviour
                     {
                         item.audioObjects[currentClip.syncPos].transform.localPosition = new Vector3(0, -10000, 0);
                     }
-                    AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);
+                    //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);///COME BACK TO THIS?
                 }
-                AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], audioObjects[currentClip.syncPos]);
+                //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], audioObjects[currentClip.syncPos]);///COME BACK TO THIS?
             }
             if (uniqueSpot != -1 && CustomAnimationClip.uniqueAnimations[currentClip.syncPos][uniqueSpot])
             {

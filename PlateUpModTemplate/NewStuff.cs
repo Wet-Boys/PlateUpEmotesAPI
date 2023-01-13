@@ -14,21 +14,26 @@ namespace EmotesAPI
     [HarmonyPatch(typeof(GameCreator), "PerformInitialSetup")]
     public static class GameCreator_InitialSetupPatch
     {
+        private static int what = 0;
         [HarmonyPostfix]
         public static void Postfix(GameCreator __instance)
         {
             var fieldInfo = typeof(GameCreator).GetField("Directory", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             AssetDirectory dir = (AssetDirectory)fieldInfo.GetValue(__instance);
 
-            PlateUpMod.playerPrefab = dir.ViewPrefabs[ViewType.Player];
+            CustomEmotesAPI.playerPrefab = dir.ViewPrefabs[ViewType.Player];
 
-            if (PlateUpMod.playerPrefab is null)
+            if (CustomEmotesAPI.playerPrefab is null)
             {
                 Debug.Log("I'm killing myself");
                 throw new NullReferenceException();
             }
 
-            PlateUpMod.playerPrefab.AddComponent<EmoteView>();
+            CustomEmotesAPI.playerPrefab.AddComponent<EmoteView>();
+
+            CustomEmotesAPI.LoadResource("assets.morbman");
+            AnimationReplacements.RunAll();
+            CustomEmotesAPI.AddNonAnimatingEmote("none");
         }
     }
     public class AddCEmoteDataToPlayers : GenericSystemBase, IModSystem
