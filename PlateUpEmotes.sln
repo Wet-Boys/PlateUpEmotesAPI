@@ -1,6 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlateUpModTemplate", "PlateUpModTemplate\PlateUpModTemplate.csproj", "{6F8DE5BC-1266-4C32-8153-10037F201488}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlateUpEmotes", "PlateUpModTemplate\PlateUpEmotes.csproj", "{6F8DE5BC-1266-4C32-8153-10037F201488}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +15,11 @@ Global
 		{6F8DE5BC-1266-4C32-8153-10037F201488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F8DE5BC-1266-4C32-8153-10037F201488}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F8DE5BC-1266-4C32-8153-10037F201488}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A650368-C207-4F79-A811-971568D8982A}
 	EndGlobalSection
 EndGlobal

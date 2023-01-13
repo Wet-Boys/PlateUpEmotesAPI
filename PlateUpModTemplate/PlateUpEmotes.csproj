@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <PlateUpDir Condition="Exists('CHANGEME\steamapps\common\PlateUp\PlateUp')">CHANGEME\steamapps\common\PlateUp\PlateUp</PlateUpDir>
+        <PlateUpDir Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp')">C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp</PlateUpDir>
         <ManagedDir>$(PlateUpDir)\PlateUp_Data\Managed\</ManagedDir>
     </PropertyGroup>
 
