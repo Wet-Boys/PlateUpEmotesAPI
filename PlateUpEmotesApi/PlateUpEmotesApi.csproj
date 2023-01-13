@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <GameLibsDir>..\.GameAssemblies\</GameLibsDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AssemblyFiles Include="$(GameLibsDir)*.dll" InProject="false" />
+        <Reference Include="@(AssemblyFiles)" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Lib.Harmony" Version="2.2.2" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <EmbeddedResource Include="Locales\**" LinkBase="Locales" />
+    </ItemGroup>
+    
+</Project>
