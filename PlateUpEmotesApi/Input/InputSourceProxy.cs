@@ -1,6 +1,5 @@
 ﻿using Controllers;
 using PlateUpEmotesApi.Logging;
-using PlateUpEmotesApi.Systems;
 using PlateUpEmotesApi.Utils;
 using Sirenix.Utilities;
 using UnityEngine;

@@ -1,9 +1,8 @@
 ﻿using Kitchen;
-using PlateUpEmotesApi.Input;
 using PlateUpEmotesApi.Logging;
 using ILogger = PlateUpEmotesApi.Logging.Loggers.ILogger;
 
-namespace PlateUpEmotesApi.Systems;
+namespace PlateUpEmotesApi.Input;
 
 public static class EmoteRouterManager
 {

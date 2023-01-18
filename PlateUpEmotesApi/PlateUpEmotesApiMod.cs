@@ -11,7 +11,6 @@ public class PlateUpEmotesApiMod : IModInitializer
     
     public void PostActivate(Mod mod)
     {
-        Harmony.DEBUG = true;
         Harmony harmony = new Harmony(MOD_ID);
         
         harmony.PatchAll();

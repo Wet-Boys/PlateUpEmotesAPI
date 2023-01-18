@@ -23,4 +23,14 @@ internal static class ReflectionUtils
 
         return (TProperty)propertyInfo.GetValue(instance);
     }
+
+    internal static TReturn InvokeMethod<TReturn>(this object instance, string methodName)
+    {
+        MethodInfo? methodInfo = instance.GetType().GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+
+        if (methodInfo is null)
+            throw new NullReferenceException();
+
+        return (TReturn)methodInfo.Invoke(instance, Array.Empty<object>());
+    }
 }

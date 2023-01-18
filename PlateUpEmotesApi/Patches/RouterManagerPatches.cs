@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
 using Kitchen;
+using PlateUpEmotesApi.Input;
 using PlateUpEmotesApi.Logging;
 using PlateUpEmotesApi.Logging.Loggers;
-using PlateUpEmotesApi.Systems;
 
 // ReSharper disable InconsistentNaming
 
