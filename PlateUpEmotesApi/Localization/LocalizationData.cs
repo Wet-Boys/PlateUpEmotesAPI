@@ -28,7 +28,6 @@ public static class LocalizationData
 
     internal static void LoadLocale(Locale locale, Dictionary<string, string> text)
     {
-        // TODO Locale not loading into dictionary?
         Logger.Debug($"Loading locale data for {locale.ToString()}");
         
         string localePath = LocalePathMap[locale];
@@ -42,12 +41,12 @@ public static class LocalizationData
         
         using var reader = new StreamReader(stream);
         var json = reader.ReadToEnd();
-        var data = JsonUtils.Deserialize<LocaleData>(json);
+        var data = JsonUtils.Deserialize<Dictionary<string, string>>(json);
 
-        foreach (var entry in data.Entries)
+        foreach (var (key, localizedString) in data)
         {
-            string token = $"{PlateUpEmotesApiMod.MOD_ID}.{entry.Token}";
-            text[token] = entry.Text;
+            string token = $"{PlateUpEmotesApiMod.MOD_ID}.{key}";
+            text[token] = localizedString;
         }
     }
 }

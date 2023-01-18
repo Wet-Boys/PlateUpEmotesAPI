@@ -1,7 +1,3 @@
 {
-  "Entries": [
-    {
-      "BIND_EMOTE_WHEEL": "Emote Wheel"
-    }
-  ]
+  "BIND_EMOTE_WHEEL": "Emote Wheel"
 }
