@@ -28,13 +28,21 @@ public class UpdateEmoteEnjoyerView : ResponsiveViewSystemBase<EmoteEnjoyerView.
             CPlayer player = EntityManager.GetComponentData<CPlayer>(entity);
             CEmoteEnjoyer emoteEnjoyer = EntityManager.GetComponentData<CEmoteEnjoyer>(entity);
             
-            Router.BroadcastUpdate(identifier, new EmoteEnjoyerView.ViewData
+            SendUpdate(identifier, new EmoteEnjoyerView.ViewData
             {
                 Inputs = emoteInputData,
                 EmoteEnjoyer = emoteEnjoyer,
                 InputSource = player.InputSource,
                 PlayerId = player.ID,
             });
+
+            // Router.BroadcastUpdate(identifier, new EmoteEnjoyerView.ViewData
+            // {
+            //     Inputs = emoteInputData,
+            //     EmoteEnjoyer = emoteEnjoyer,
+            //     InputSource = player.InputSource,
+            //     PlayerId = player.ID,
+            // });
 
             EmoteEnjoyerView.ResponseData result = default;
             if (!ApplyUpdates(identifier, data => result.EmoteId = data.EmoteId, true))

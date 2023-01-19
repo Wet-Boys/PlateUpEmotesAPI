@@ -2,9 +2,10 @@
 
 namespace PlateUpEmotesApi.Anim;
 
-public class CustomAnimationClip : MonoBehaviour
+public class CustomAnimationClip
 {
-    public AnimationClip[] clip, secondaryClip; //DONT SUPPORT MULTI CLIP ANIMATIONS TO SYNC     //but why not? how hard could it be, I'm sure I left that note for a reason....  //it was for a reason, but it works now
+    public AnimationClip[] clip; //DONT SUPPORT MULTI CLIP ANIMATIONS TO SYNC     //but why not? how hard could it be, I'm sure I left that note for a reason....  //it was for a reason, but it works now
+    public AnimationClip[]? secondaryClip; //DONT SUPPORT MULTI CLIP ANIMATIONS TO SYNC     //but why not? how hard could it be, I'm sure I left that note for a reason....  //it was for a reason, but it works now
     internal bool looping;
     internal string wwiseEvent;
     internal bool syncronizeAudio;
@@ -15,10 +16,10 @@ public class CustomAnimationClip : MonoBehaviour
     internal bool stopOnMove;
     internal bool visibility;
     public int startPref, joinPref;
-    public JoinSpot[] joinSpots;
+    public JoinSpot[]? joinSpots;
     public bool useSafePositionReset;
     public string customName;
-    public Action<BoneMapper> customPostEventCodeSync;
+    public Action<BoneMapper>? customPostEventCodeSync;
     public Action<BoneMapper> customPostEventCodeNoSync;
 
 
@@ -28,7 +29,7 @@ public class CustomAnimationClip : MonoBehaviour
     public static List<int> syncPlayerCount = new List<int>();
     public static List<List<bool>> uniqueAnimations = new List<List<bool>>();
 
-    internal CustomAnimationClip(AnimationClip[] _clip, bool _loop/*, bool _shouldSyncronize = false*/, string[] _wwiseEventName = null, string[] _wwiseStopEvent = null, HumanBodyBones[] rootBonesToIgnore = null, HumanBodyBones[] soloBonesToIgnore = null, AnimationClip[] _secondaryClip = null, bool dimWhenClose = false, bool stopWhenMove = false, bool stopWhenAttack = false, bool visible = true, bool syncAnim = false, bool syncAudio = false, int startPreference = -1, int joinPreference = -1, JoinSpot[] _joinSpots = null, bool safePositionReset = false, string customName = "NO_CUSTOM_NAME", Action<BoneMapper> _customPostEventCodeSync = null, Action<BoneMapper> _customPostEventCodeNoSync = null)
+    internal CustomAnimationClip(AnimationClip[] _clip, bool _loop/*, bool _shouldSyncronize = false*/, string[]? _wwiseEventName = null, string[]? _wwiseStopEvent = null, HumanBodyBones[]? rootBonesToIgnore = null, HumanBodyBones[]? soloBonesToIgnore = null, AnimationClip[]? _secondaryClip = null, bool dimWhenClose = false, bool stopWhenMove = false, bool stopWhenAttack = false, bool visible = true, bool syncAnim = false, bool syncAudio = false, int startPreference = -1, int joinPreference = -1, JoinSpot[]? _joinSpots = null, bool safePositionReset = false, string customName = "NO_CUSTOM_NAME", Action<BoneMapper>? _customPostEventCodeSync = null, Action<BoneMapper> _customPostEventCodeNoSync = null)
     {
         if (rootBonesToIgnore == null)
             rootBonesToIgnore = new HumanBodyBones[0];
@@ -64,8 +65,8 @@ public class CustomAnimationClip : MonoBehaviour
         //    //}
         //    wwiseEvent = _wwiseEventName;
         //}
-        string[] wwiseEvents;
-        string[] wwiseStopEvents;
+        string[]? wwiseEvents;
+        string[]? wwiseStopEvents;
         if (_wwiseEventName == null)
         {
             wwiseEvents = new string[] { "" };

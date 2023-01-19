@@ -29,6 +29,6 @@ public class PlateUpEmotesApiMod : IModInitializer
 
     private void LoadTestingStuff()
     {
-        PlateUpEmotesManager.AddNonAnimatingEmote("none");
+        //PlateUpEmotesManager.AddNonAnimatingEmote("none");
     }
 }

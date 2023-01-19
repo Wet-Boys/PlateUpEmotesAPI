@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+CRC: 1519177546
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9c37b182a00bc08edd34a92636204f73
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 191540710b9141ac59a908ea8c08ef60
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/morbman.prefab
+Dependencies: []

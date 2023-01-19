@@ -23,41 +23,60 @@ public class EmoteEnjoyerView : ResponsiveObjectView<EmoteEnjoyerView.ViewData, 
         boneMapper ??= GetComponentInChildren<BoneMapper>();
     }
 
+    private int RandomEmote()
+    {
+        int rand = UnityEngine.Random.Range(0, PlateUpEmotesManager.allClipNames.Count);
+        
+        while (PlateUpEmotesManager.blacklistedClips.Contains(rand))
+            rand = UnityEngine.Random.Range(0, PlateUpEmotesManager.allClipNames.Count);
+
+        return rand;
+    }
+
     private void Update()
     {
+        // Todo: implement emote wheel state
+
         if (_data.Inputs.State.EmoteWheelAction == ButtonState.Pressed)
         {
-            emoting = !emoting;
-            
-            if (emoting)
-            {
-                EmotingState state = _data.EmoteEnjoyer.State;
-                boneMapper!.PlayAnim(state.GetAnimName(), state.Pos);
-            }
+            emoteId = RandomEmote();
         }
     }
+    
+    
 
     protected override void UpdateData(ViewData data)
     {
         _isMyPlayer = data.InputSource == InputSourceIdentifier.Identifier;
+
+        var oldData = _data;
         _data = data;
 
-        emoteId = _data.EmoteEnjoyer.State.EmoteId;
+        if (oldData.EmoteEnjoyer.State != _data.EmoteEnjoyer.State)
+        {
+            emoteId = _data.EmoteEnjoyer.State.EmoteId;
+            boneMapper!.PlayAnim(PlateUpEmotesManager.allClipNames[emoteId], -2);
+        }
     }
 
     public override bool HasStateUpdate(out IResponseData? state)
     {
         state = null;
         
-        if (!_isMyPlayer)
+        // if (!_isMyPlayer)
+        //     return false;
+
+        bool changed = emoteId != _data.EmoteEnjoyer.State.EmoteId;
+        if (!changed)
             return false;
+        
 
         state = new ResponseData
         {
             EmoteId = emoteId,
             Playing = emoting
         };
-        return true;
+        return changed;
     }
 
     protected override void UpdatePosition()

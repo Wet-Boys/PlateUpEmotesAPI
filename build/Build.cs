@@ -36,6 +36,8 @@ class Build : NukeBuild
 
     readonly AbsolutePath GameAssembliesDir = RootDirectory / ".GameAssemblies";
 
+    readonly AbsolutePath AssetBundlesDir = RootDirectory / "PlateUpEmotesApi-Unity" / "AssetBundles" / "StandaloneWindows";
+
     IEnumerable<Project> GetProjects()
     {
         return Solution.GetProjects("*")
@@ -93,8 +95,27 @@ class Build : NukeBuild
             });
         });
 
+    Target CopyAssetBundles => _ => _
+        .Before(Compile)
+        .Executes(() =>
+        {
+            var assetBundles = AssetBundlesDir.GlobFiles("*")
+                .Where(file => !file.Name.Contains('.') && file.Name != "StandaloneWindows");
+
+            GetProjects().ForEach(project =>
+            {
+                var destRoot = project.Path.Parent / "Assets";
+                
+                assetBundles.ForEach(assetBundle =>
+                {
+                    var dest = destRoot / assetBundle.Name;
+                    File.Copy(assetBundle, dest, true);
+                });
+            });
+        });
+
     Target Compile => _ => _
-        .DependsOn(Restore, GetGameAssemblies)
+        .DependsOn(Restore, GetGameAssemblies, CopyAssetBundles)
         .Executes(() =>
         {
             GetProjects().ForEach(project =>

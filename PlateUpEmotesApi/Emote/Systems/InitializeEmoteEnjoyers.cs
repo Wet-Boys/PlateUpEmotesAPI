@@ -26,8 +26,6 @@ public class InitializeEmoteEnjoyers : GenericSystemBase, IModSystem
             .None(typeof(CEmoteEnjoyer), typeof(CLinkedEmoteEnjoyerView)));
 
         _addNewViews = World.GetExistingSystem<AddNewViews>();
-        if (_addNewViews is null)
-            throw new NullReferenceException();
     }
 
     protected override void OnUpdate()
@@ -37,10 +35,10 @@ public class InitializeEmoteEnjoyers : GenericSystemBase, IModSystem
         {
             EntityManager.AddComponent<CEmoteEnjoyer>(entity);
             CLinkedView linkedView = EntityManager.GetComponentData<CLinkedView>(entity);
-
-            GameObject playerObject = EntityViewManager.EntityViews[linkedView.Identifier].GameObject;
-            IObjectView view = playerObject.AddComponent<EmoteEnjoyerView>();
             
+            GameObject playerObject = EntityViewManager.EntityViews[linkedView.Identifier].GameObject;
+            IObjectView view = playerObject.GetComponent<EmoteEnjoyerView>();
+
             ViewIdentifier identifier = _addNewViews!.InvokeMethod<ViewIdentifier>("GetNewIdentifier");
             EntityManager.AddComponent<CLinkedEmoteEnjoyerView>(entity);
             EntityManager.SetComponentData(entity, new CLinkedEmoteEnjoyerView

@@ -264,7 +264,7 @@ public class BoneMapper : MonoBehaviour
     {
         a2.speed = speed;
     }
-    internal void NewAnimation(JoinSpot[] locations)
+    internal void NewAnimation(JoinSpot[]? locations)
     {
         try
         {
@@ -821,7 +821,8 @@ public class BoneMapper : MonoBehaviour
     }
     void AddAudioObject()
     {
-        PlateUpEmotesManager.audioContainers[currentClip.syncPos].GetComponent<AudioContainer>().playingObjects.Add(this.gameObject);
+        // TODO COME BACK TO THIS?
+        // PlateUpEmotesManager.audioContainers[currentClip.syncPos].GetComponent<AudioContainer>().playingObjects.Add(this.gameObject);
     }
     void RemoveAudioObject()
     {
