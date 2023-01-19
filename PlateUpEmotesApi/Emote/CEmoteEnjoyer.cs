@@ -1,13 +1,17 @@
-﻿using KitchenMods;
+﻿using Kitchen;
+using KitchenMods;
+using MessagePack;
 
 namespace PlateUpEmotesApi.Emote;
 
-public struct CEmoteEnjoyer : IModComponent
+[MessagePackObject]
+public struct CEmoteEnjoyer : IModComponent, IViewData.ICheckForChanges<CEmoteEnjoyer>
 {
-    /// <summary>
-    /// -1 reserved for cancel emote.
-    /// </summary>
-    public int EmoteId;
+    [Key(1)]
+    public EmotingState State;
     
-    
+    public bool IsChangedFrom(CEmoteEnjoyer check)
+    {
+        return State != check.State;
+    }
 }

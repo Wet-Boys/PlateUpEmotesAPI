@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using Kitchen;
+using PlateUpEmotesApi.Anim;
 using PlateUpEmotesApi.Logging;
 using PlateUpEmotesApi.Logging.Loggers;
 // ReSharper disable InconsistentNaming
@@ -21,9 +22,7 @@ public static class GameCreatorPatches
             if (Prefabs.PlayerPrefab is null)
                 throw new NullReferenceException("Failed to get player prefab!!!!");
             
-            Logger.Debug("Adding EmoteEnjoyerView to the player prefab");
-
-            // Prefabs.PlayerPrefab.AddComponent<EmoteEnjoyerView>();
+            AnimationReplacements.RunAll();
         }
     }
 }

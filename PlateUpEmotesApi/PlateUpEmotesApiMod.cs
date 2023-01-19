@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using KitchenMods;
+using PlateUpEmotesApi.Utils;
 
 namespace PlateUpEmotesApi;
 
@@ -11,8 +12,10 @@ public class PlateUpEmotesApiMod : IModInitializer
     
     public void PostActivate(Mod mod)
     {
-        Harmony harmony = new Harmony(MOD_ID);
+        Assets.AddBundle("morbman");
+        LoadTestingStuff();
         
+        Harmony harmony = new Harmony(MOD_ID);
         harmony.PatchAll();
     }
 
@@ -22,6 +25,10 @@ public class PlateUpEmotesApiMod : IModInitializer
 
     public void PostInject()
     {
-        
+    }
+
+    private void LoadTestingStuff()
+    {
+        PlateUpEmotesManager.AddNonAnimatingEmote("none");
     }
 }

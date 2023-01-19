@@ -31,14 +31,17 @@ public class UpdateEmoteEnjoyerView : ResponsiveViewSystemBase<EmoteEnjoyerView.
             Router.BroadcastUpdate(identifier, new EmoteEnjoyerView.ViewData
             {
                 Inputs = emoteInputData,
-                InputSource = player.InputSource
+                EmoteEnjoyer = emoteEnjoyer,
+                InputSource = player.InputSource,
+                PlayerId = player.ID,
             });
 
             EmoteEnjoyerView.ResponseData result = default;
             if (!ApplyUpdates(identifier, data => result.EmoteId = data.EmoteId, true))
                 return;
 
-            emoteEnjoyer.EmoteId = result.EmoteId;
+            emoteEnjoyer.State.EmoteId = result.EmoteId;
+            emoteEnjoyer.State.Playing = result.Playing;
             EntityManager.SetComponentData(entity, emoteEnjoyer);
         }
     }
