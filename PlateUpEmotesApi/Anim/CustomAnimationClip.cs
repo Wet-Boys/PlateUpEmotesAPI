@@ -4,32 +4,45 @@ namespace PlateUpEmotesApi.Anim;
 
 public class CustomAnimationClip
 {
-    public AnimationClip[] clip; //DONT SUPPORT MULTI CLIP ANIMATIONS TO SYNC     //but why not? how hard could it be, I'm sure I left that note for a reason....  //it was for a reason, but it works now
-    public AnimationClip[]? secondaryClip; //DONT SUPPORT MULTI CLIP ANIMATIONS TO SYNC     //but why not? how hard could it be, I'm sure I left that note for a reason....  //it was for a reason, but it works now
+    public AnimationClip[] clip; 
+    public AnimationClip[]? secondaryClip; 
     internal bool looping;
-    internal string wwiseEvent;
-    internal bool syncronizeAudio;
+    internal List<AudioClip> audioClips= new List<AudioClip>();
     internal List<HumanBodyBones> soloIgnoredBones;
     internal List<HumanBodyBones> rootIgnoredBones;
-    internal bool dimAudioWhenClose;
-    internal bool stopOnAttack;
-    internal bool stopOnMove;
     internal bool visibility;
     public int startPref, joinPref;
     public JoinSpot[]? joinSpots;
-    public bool useSafePositionReset;
     public string customName;
     public Action<BoneMapper>? customPostEventCodeSync;
     public Action<BoneMapper> customPostEventCodeNoSync;
 
 
     internal bool syncronizeAnimation;
+    internal bool syncronizeAudio;
     public int syncPos;
     public static List<float> syncTimer = new List<float>();
     public static List<int> syncPlayerCount = new List<int>();
     public static List<List<bool>> uniqueAnimations = new List<List<bool>>();
+    public bool dimAudio;
 
-    internal CustomAnimationClip(AnimationClip[] _clip, bool _loop/*, bool _shouldSyncronize = false*/, string[]? _wwiseEventName = null, string[]? _wwiseStopEvent = null, HumanBodyBones[]? rootBonesToIgnore = null, HumanBodyBones[]? soloBonesToIgnore = null, AnimationClip[]? _secondaryClip = null, bool dimWhenClose = false, bool stopWhenMove = false, bool stopWhenAttack = false, bool visible = true, bool syncAnim = false, bool syncAudio = false, int startPreference = -1, int joinPreference = -1, JoinSpot[]? _joinSpots = null, bool safePositionReset = false, string customName = "NO_CUSTOM_NAME", Action<BoneMapper>? _customPostEventCodeSync = null, Action<BoneMapper> _customPostEventCodeNoSync = null)
+    internal CustomAnimationClip(
+        AnimationClip[] _clip, 
+        bool _loop, 
+        HumanBodyBones[]? rootBonesToIgnore = null, 
+        HumanBodyBones[]? soloBonesToIgnore = null, 
+        AnimationClip[]? _secondaryClip = null, 
+        bool visible = true, 
+        bool syncAnim = false, 
+        bool syncAudio = false,
+        int startPreference = -1, 
+        int joinPreference = -1, 
+        JoinSpot[]? _joinSpots = null, 
+        string customName = "NO_CUSTOM_NAME", 
+        Action<BoneMapper>? _customPostEventCodeSync = null, 
+        Action<BoneMapper> _customPostEventCodeNoSync = null, 
+        List<AudioClip> audioClips = null,
+        bool dimAudio = false)
     {
         if (rootBonesToIgnore == null)
             rootBonesToIgnore = new HumanBodyBones[0];
@@ -38,10 +51,6 @@ public class CustomAnimationClip
         clip = _clip;
         secondaryClip = _secondaryClip;
         looping = _loop;
-        //syncronizeAnimation = _shouldSyncronize;
-        dimAudioWhenClose = dimWhenClose;
-        stopOnAttack = stopWhenAttack;
-        stopOnMove = stopWhenMove;
         visibility = visible;
         joinPref = joinPreference;
         startPref = startPreference;
@@ -65,20 +74,13 @@ public class CustomAnimationClip
         //    //}
         //    wwiseEvent = _wwiseEventName;
         //}
-        string[]? wwiseEvents;
-        string[]? wwiseStopEvents;
-        if (_wwiseEventName == null)
+        this.audioClips = audioClips;
+        if (audioClips == null)
         {
-            wwiseEvents = new string[] { "" };
-            wwiseStopEvents = new string[] { "" };
+            audioClips = new List<AudioClip>();
         }
-        else
-        {
-            wwiseEvents = _wwiseEventName;
-            wwiseStopEvents = _wwiseStopEvent;
-        }
-        BoneMapper.stopEvents.Add(wwiseStopEvents);
-        BoneMapper.startEvents.Add(wwiseEvents);
+        BoneMapper.audioSources.Add(new AudioSource());
+        BoneMapper.startEvents.Add(audioClips.ToArray());
         if (soloBonesToIgnore.Length != 0)
         {
             soloIgnoredBones = new List<HumanBodyBones>(soloBonesToIgnore);
@@ -111,7 +113,7 @@ public class CustomAnimationClip
         if (_joinSpots == null)
             _joinSpots = new JoinSpot[0];
         joinSpots = _joinSpots;
-        this.useSafePositionReset = safePositionReset;
         this.customName = customName;
+        this.dimAudio= dimAudio;
     }
 }
