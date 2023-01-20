@@ -42,41 +42,33 @@ public class EmoteEnjoyerView : ResponsiveObjectView<EmoteEnjoyerView.ViewData, 
             emoteId = RandomEmote();
         }
     }
-    
-    
 
     protected override void UpdateData(ViewData data)
     {
         _isMyPlayer = data.InputSource == InputSourceIdentifier.Identifier;
 
-        var oldData = _data;
         _data = data;
-
-        if (oldData.EmoteEnjoyer.State != _data.EmoteEnjoyer.State)
-        {
-            emoteId = _data.EmoteEnjoyer.State.EmoteId;
+        
+        if (emoteId != _data.EmoteEnjoyer.State.EmoteId)
             boneMapper!.PlayAnim(PlateUpEmotesManager.allClipNames[emoteId], -2);
-        }
+        
+        emoteId = _data.EmoteEnjoyer.State.EmoteId;
     }
 
     public override bool HasStateUpdate(out IResponseData? state)
     {
         state = null;
         
-        // if (!_isMyPlayer)
-        //     return false;
-
-        bool changed = emoteId != _data.EmoteEnjoyer.State.EmoteId;
-        if (!changed)
+        if (!_isMyPlayer || emoteId == _data.EmoteEnjoyer.State.EmoteId)
             return false;
-        
 
         state = new ResponseData
         {
             EmoteId = emoteId,
             Playing = emoting
         };
-        return changed;
+        
+        return true;
     }
 
     protected override void UpdatePosition()
@@ -113,9 +105,9 @@ public class EmoteEnjoyerView : ResponsiveObjectView<EmoteEnjoyerView.ViewData, 
 
         public bool IsChangedFrom(ViewData check)
         {
-            return Inputs.State != check.Inputs.State &&
-                   EmoteEnjoyer.State != check.EmoteEnjoyer.State &&
-                   InputSource != check.InputSource &&
+            return Inputs.State != check.Inputs.State ||
+                   EmoteEnjoyer.State != check.EmoteEnjoyer.State ||
+                   InputSource != check.InputSource ||
                    PlayerId != check.PlayerId;
         }
 
