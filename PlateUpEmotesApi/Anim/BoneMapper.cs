@@ -7,7 +7,7 @@ namespace PlateUpEmotesApi.Anim;
 public class BoneMapper : MonoBehaviour
 {
     public static List<AudioClip[]> startEvents = new();
-    internal List<GameObject> audioObjects = new();
+    internal static List<GameObject> audioObjects = new();
     public SkinnedMeshRenderer smr1, smr2;
     public Animator a1, a2;
     public List<BonePair> pairs = new();
@@ -105,7 +105,7 @@ public class BoneMapper : MonoBehaviour
             }
             catch (Exception e)
             {
-                Debug.Log($"EmoteAPI: had issue turning off audio before new audio played: {e}\n Notable items for debugging: [currentClip: {currentClip}] [currentClip.syncPos: {currentClip.syncPos}] [currEvent: {currEvent}]");
+                Debug.Log($"EmoteAPI: had issue turning off audio before new audio played: {e}\n Notable items for debugging: [currentClip: {currentClip}] [currentClip.syncPos: {currentClip.syncPos}] [currEvent: {currEvent}] [audioSources[currentClip.syncPos]: {audioSources[currentClip.syncPos]}]");
             }
         }
         catch (Exception)
@@ -213,7 +213,7 @@ public class BoneMapper : MonoBehaviour
                     //AkSoundEngine.PostEvent(startEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                 }
             }
-            audioObjects[currentClip.syncPos].transform.localPosition = Vector3.zero;
+            //audioObjects[currentClip.syncPos].transform.localPosition = Vector3.zero;
         }
         SetAnimationSpeed(1);
         if (currentClip.secondaryClip != null && currentClip.secondaryClip.Length != 0)
@@ -389,54 +389,19 @@ public class BoneMapper : MonoBehaviour
             return;
         }
         allMappers.Add(this);
-        foreach (var item in startEvents)
+        if (audioSources.Count == 0)
         {
-            GameObject obj = new GameObject();
-            if (item[0] != null)
+            foreach (var _clip in startEvents)
             {
-                obj.name = $"{item[0]}_AudioObject";
-            }
-            obj.transform.SetParent(transform);
-            obj.transform.localPosition = new Vector3(0, -10000, 0);
-            audioObjects.Add(obj);
-        }
-        //foreach (var item in model.GetComponents<DynamicBone>())
-        //{
-        //    try
-        //    {
-        //        if (!item.m_Exclusions.Contains(item.m_Root))
-        //        {
-        //            ignore.Add(item.m_Root.name);
-        //        }
-        //        AddIgnore(item, item.m_Root);
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //}
-        if (model.name.StartsWith("mdlLoader"))
-        {
-            Transform LClav = model.transform, RClav = model.transform;
-            foreach (var item in model.GetComponentsInChildren<Transform>())
-            {
-                if (item.name == "clavicle.l")
+                GameObject obj = new GameObject();
+                if (_clip[0] != null)
                 {
-                    LClav = item;
-                    ignore.Add(LClav.name);
+                    obj.name = $"{_clip[0].name}_AudioObject";
                 }
-                if (item.name == "clavicle.r")
-                {
-                    RClav = item;
-                    ignore.Add(RClav.name);
-                }
-            }
-            foreach (var item in LClav.GetComponentsInChildren<Transform>())
-            {
-                ignore.Add(item.name);
-            }
-            foreach (var item in RClav.GetComponentsInChildren<Transform>())
-            {
-                ignore.Add(item.name);
+                GameObject.DontDestroyOnLoad(obj);
+                obj.AddComponent<AudioSource>();
+                BoneMapper.audioSources.Add(obj.GetComponent<AudioSource>());
+                BoneMapper.audioObjects.Add(obj);
             }
         }
         int offset = 0;
@@ -803,14 +768,14 @@ public class BoneMapper : MonoBehaviour
     }
     void RemoveAudioObject()
     {
-        try
-        {
-            PlateUpEmotesManager.audioContainers[currentClip.syncPos].GetComponent<AudioContainer>().playingObjects.Remove(this.gameObject);
-        }
-        catch (Exception e)
-        {
-            Debug.Log($"EmoteAPI: failed to remove object {this.gameObject} from playingObjects: {e}");
-        }
+        //try
+        //{
+        //    PlateUpEmotesManager.audioContainers[currentClip.syncPos].GetComponent<AudioContainer>().playingObjects.Remove(this.gameObject);
+        //}
+        //catch (Exception e)
+        //{
+        //    Debug.Log($"EmoteAPI: failed to remove object {this.gameObject} from playingObjects: {e}");
+        //}
     }
     void OnDestroy()
     {

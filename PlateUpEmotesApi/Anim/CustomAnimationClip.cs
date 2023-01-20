@@ -4,10 +4,10 @@ namespace PlateUpEmotesApi.Anim;
 
 public class CustomAnimationClip
 {
-    public AnimationClip[] clip; 
-    public AnimationClip[]? secondaryClip; 
+    public AnimationClip[] clip;
+    public AnimationClip[]? secondaryClip;
     internal bool looping;
-    internal List<AudioClip> audioClips= new List<AudioClip>();
+    internal List<AudioClip> audioClips = new List<AudioClip>();
     internal List<HumanBodyBones> soloIgnoredBones;
     internal List<HumanBodyBones> rootIgnoredBones;
     internal bool visibility;
@@ -27,20 +27,20 @@ public class CustomAnimationClip
     public bool dimAudio;
 
     internal CustomAnimationClip(
-        AnimationClip[] _clip, 
-        bool _loop, 
-        HumanBodyBones[]? rootBonesToIgnore = null, 
-        HumanBodyBones[]? soloBonesToIgnore = null, 
-        AnimationClip[]? _secondaryClip = null, 
-        bool visible = true, 
-        bool syncAnim = false, 
+        AnimationClip[] _clip,
+        bool _loop,
+        HumanBodyBones[]? rootBonesToIgnore = null,
+        HumanBodyBones[]? soloBonesToIgnore = null,
+        AnimationClip[]? _secondaryClip = null,
+        bool visible = true,
+        bool syncAnim = false,
         bool syncAudio = false,
-        int startPreference = -1, 
-        int joinPreference = -1, 
-        JoinSpot[]? _joinSpots = null, 
-        string customName = "NO_CUSTOM_NAME", 
-        Action<BoneMapper>? _customPostEventCodeSync = null, 
-        Action<BoneMapper> _customPostEventCodeNoSync = null, 
+        int startPreference = -1,
+        int joinPreference = -1,
+        JoinSpot[]? _joinSpots = null,
+        string customName = "NO_CUSTOM_NAME",
+        Action<BoneMapper>? _customPostEventCodeSync = null,
+        Action<BoneMapper> _customPostEventCodeNoSync = null,
         List<AudioClip> audioClips = null,
         bool dimAudio = false)
     {
@@ -79,7 +79,8 @@ public class CustomAnimationClip
         {
             audioClips = new List<AudioClip>();
         }
-        BoneMapper.audioSources.Add(new AudioSource());
+
+
         BoneMapper.startEvents.Add(audioClips.ToArray());
         if (soloBonesToIgnore.Length != 0)
         {
@@ -114,6 +115,6 @@ public class CustomAnimationClip
             _joinSpots = new JoinSpot[0];
         joinSpots = _joinSpots;
         this.customName = customName;
-        this.dimAudio= dimAudio;
+        this.dimAudio = dimAudio;
     }
 }
