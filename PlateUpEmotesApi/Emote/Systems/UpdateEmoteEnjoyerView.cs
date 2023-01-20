@@ -14,7 +14,7 @@ public class UpdateEmoteEnjoyerView : ResponsiveViewSystemBase<EmoteEnjoyerView.
     {
         base.Initialise();
         _emoteEnjoyers = GetEntityQuery(new QueryHelper()
-            .All(typeof(CPlayer), typeof(CEmoteInputData), typeof(CEmoteEnjoyer), typeof(CLinkedEmoteEnjoyerView)));
+            .All(typeof(CPlayer), typeof(CEmoteInputData), typeof(CEmoteEnjoyer), typeof(CLinkedView)));
     }
 
     protected override void OnUpdate()
@@ -23,18 +23,18 @@ public class UpdateEmoteEnjoyerView : ResponsiveViewSystemBase<EmoteEnjoyerView.
 
         foreach (var entity in entities)
         {
-            ViewIdentifier identifier = EntityManager.GetComponentData<CLinkedEmoteEnjoyerView>(entity).Identifier;
+            CLinkedView view = EntityManager.GetComponentData<CLinkedView>(entity);
             CEmoteInputData emoteInputData = EntityManager.GetComponentData<CEmoteInputData>(entity);
             CPlayer player = EntityManager.GetComponentData<CPlayer>(entity);
             CEmoteEnjoyer emoteEnjoyer = EntityManager.GetComponentData<CEmoteEnjoyer>(entity);
             
-            SendUpdate(identifier, new EmoteEnjoyerView.ViewData
+            SendUpdate(view, new EmoteEnjoyerView.ViewData
             {
                 Inputs = emoteInputData,
                 EmoteEnjoyer = emoteEnjoyer,
                 InputSource = player.InputSource,
                 PlayerId = player.ID,
-            });
+            }, MessageType.SpecificViewUpdate);
 
             // Router.BroadcastUpdate(identifier, new EmoteEnjoyerView.ViewData
             // {
@@ -45,7 +45,7 @@ public class UpdateEmoteEnjoyerView : ResponsiveViewSystemBase<EmoteEnjoyerView.
             // });
 
             EmoteEnjoyerView.ResponseData result = default;
-            if (!ApplyUpdates(identifier, data => result.EmoteId = data.EmoteId, true))
+            if (!ApplyUpdates(view, data => result.EmoteId = data.EmoteId, true))
                 return;
 
             emoteEnjoyer.State.EmoteId = result.EmoteId;
