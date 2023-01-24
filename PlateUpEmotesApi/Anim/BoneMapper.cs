@@ -197,6 +197,7 @@ public class BoneMapper : MonoBehaviour
                 else if (!audioSources[currentClip.syncPos].isPlaying)
                 {
                     audioSources[currentClip.syncPos].PlayOneShot(startEvents[currentClip.syncPos][currEvent]);
+                    audioSources[currentClip.syncPos].volume = .05f;
                     //AkSoundEngine.PostEvent(startEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);///COME BACK TO THIS?
                 }
             }
@@ -209,7 +210,9 @@ public class BoneMapper : MonoBehaviour
                 }
                 else
                 {
+
                     audioSources[currentClip.syncPos].PlayOneShot(startEvents[currentClip.syncPos][currEvent]);
+                    audioSources[currentClip.syncPos].volume = .05f;
                     //AkSoundEngine.PostEvent(startEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                 }
             }

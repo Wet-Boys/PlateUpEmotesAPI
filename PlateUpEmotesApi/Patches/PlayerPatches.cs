@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using Kitchen;
+using PlateUpEmotesApi.Emote;
 using PlateUpEmotesApi.Input;
 using PlateUpEmotesApi.Logging;
 using PlateUpEmotesApi.Utils;
@@ -24,7 +25,7 @@ public static class PlayerPatches
         
             EntityManager entityManager = __instance.GetProperty<EntityManager>("EntMan");
             entityManager.AddComponent<CEmoteInputData>(__instance.Entity);
-            // entityManager.AddComponent<CEmoteData>(__instance.Entity);
+            entityManager.AddComponent<CEmoteEnjoyer>(__instance.Entity);
         
             Logger.Debug($"Added Emote related components to player {__instance.Index}");
         }
@@ -41,7 +42,7 @@ public static class PlayerPatches
 
             EntityManager entityManager = __instance.GetProperty<EntityManager>("EntMan");
             entityManager.AddComponent<CEmoteInputData>(__instance.Entity);
-            // entityManager.AddComponent<CEmoteData>(__instance.Entity);
+            entityManager.AddComponent<CEmoteEnjoyer>(__instance.Entity);
             
             Logger.Debug($"Added Emote related components to player {__instance.Index}");
         }

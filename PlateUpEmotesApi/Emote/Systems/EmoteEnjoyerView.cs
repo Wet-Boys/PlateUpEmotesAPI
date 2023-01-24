@@ -40,6 +40,7 @@ public class EmoteEnjoyerView : ResponsiveObjectView<EmoteEnjoyerView.ViewData, 
         if (_data.Inputs.State.EmoteWheelAction == ButtonState.Pressed)
         {
             emoteId = RandomEmote();
+            Debug.Log($"--------------  {emoteId}");
         }
     }
 
@@ -48,6 +49,7 @@ public class EmoteEnjoyerView : ResponsiveObjectView<EmoteEnjoyerView.ViewData, 
         _isMyPlayer = data.InputSource == InputSourceIdentifier.Identifier;
 
         _data = data;
+        Debug.Log($"--------------  new data for id:{_data.PlayerId}   {_data.Inputs.State.EmoteWheelAction}");
         
         if (emoteId != _data.EmoteEnjoyer.State.EmoteId)
             boneMapper!.PlayAnim(PlateUpEmotesManager.allClipNames[emoteId], -2);

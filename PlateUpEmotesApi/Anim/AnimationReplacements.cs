@@ -22,6 +22,7 @@ internal static class AnimationReplacements
             throw new NullReferenceException();
         
         Import(Prefabs.PlayerPrefab, "morbman.prefab");
+        Prefabs.PlayerPrefab.GetComponentInChildren<BoneMapper>().scale = .5f;
     }
     internal static void Import(GameObject go, string skeleton)
     {
