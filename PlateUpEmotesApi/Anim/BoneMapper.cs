@@ -87,14 +87,12 @@ public class BoneMapper : MonoBehaviour
                     if (!currentClip.syncronizeAudio)
                     {
                         audioSources[currentClip.syncPos].Stop();
-                        //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                     }
 
 
                     if (CustomAnimationClip.syncPlayerCount[currentClip.syncPos] == 0 && currentClip.syncronizeAudio)
                     {
                         audioSources[currentClip.syncPos].Stop();
-                        //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);///COME BACK TO THIS?
                     }
                 }
                 if (uniqueSpot != -1 && CustomAnimationClip.uniqueAnimations[currentClip.syncPos][uniqueSpot])
@@ -198,7 +196,7 @@ public class BoneMapper : MonoBehaviour
                 {
                     audioSources[currentClip.syncPos].PlayOneShot(startEvents[currentClip.syncPos][currEvent]);
                     audioSources[currentClip.syncPos].volume = .05f;
-                    //AkSoundEngine.PostEvent(startEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);///COME BACK TO THIS?
+                    //TODO Sync up audio volume with a slider
                 }
             }
             else if (!currentClip.syncronizeAudio)
@@ -213,7 +211,6 @@ public class BoneMapper : MonoBehaviour
 
                     audioSources[currentClip.syncPos].PlayOneShot(startEvents[currentClip.syncPos][currEvent]);
                     audioSources[currentClip.syncPos].volume = .05f;
-                    //AkSoundEngine.PostEvent(startEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                 }
             }
             //audioObjects[currentClip.syncPos].transform.localPosition = Vector3.zero;
@@ -275,7 +272,8 @@ public class BoneMapper : MonoBehaviour
             overrideMoveSpeed = false;
             if (parentGameObject && !preserveParent)
             {
-                //Vector3 OHYEAHHHHHH = transform.parent.GetComponent<CharacterModel>().body.gameObject.transform.position;///COME BACK TO THIS?
+                //TODO Make sure we don't have to teleport players after they had a parentGameObject which drags them around
+                //Vector3 OHYEAHHHHHH = transform.parent.GetComponent<CharacterModel>().body.gameObject.transform.position;
                 //OHYEAHHHHHH = (TeleportHelper.FindSafeTeleportDestination(transform.parent.GetComponent<CharacterModel>().body.gameObject.transform.position, transform.parent.GetComponent<CharacterModel>().body, RoR2Application.rng)) ?? OHYEAHHHHHH;
                 //Vector3 result = OHYEAHHHHHH;
                 //RaycastHit raycastHit = default(RaycastHit);
@@ -514,7 +512,8 @@ public class BoneMapper : MonoBehaviour
     }
     void SetRTPCInDimming(float closestDimmingSource)
     {
-        //if (closestDimmingSource < 20f && Settings.DimmingSpheres.Value && Settings.EmotesVolume.Value > 0)///COME BACK TO THIS?
+        //TODO lower ingame music whenever a diming emote is playing (no dimming spheres because this game doesn't work like that)
+        //if (closestDimmingSource < 20f && Settings.DimmingSpheres.Value && Settings.EmotesVolume.Value > 0)
         //{
         //    Current_MSX = Mathf.Lerp(Current_MSX, (closestDimmingSource / 20f) * CustomEmotesAPI.Actual_MSX, Time.deltaTime * 3);
         //    AkSoundEngine.SetRTPCValue("Volume_MSX", Current_MSX);
@@ -534,38 +533,7 @@ public class BoneMapper : MonoBehaviour
     {
         try
         {
-            //if (!CustomEmotesAPI.localMapper)///COME BACK TO THIS?
-            //{
-            //    var body = NetworkUser.readOnlyLocalPlayersList[0].master?.GetBody();
-            //    if (body.gameObject.GetComponent<PlayerView>().transform == transform.parent)
-            //    {
-            //        CustomEmotesAPI.localMapper = this;
-
-            //        local = true;
-
-
-            //        //GameObject g = new GameObject();
-            //        //g.name = "AudioContainer";
-
-            //        //if (CustomEmotesAPI.audioContainers.Count == 0)
-            //        //{
-            //        //    GameObject audioContainerHolder = new GameObject();
-            //        //    audioContainerHolder.name = "Audio Container Holder";
-            //        //    UnityEngine.Object.DontDestroyOnLoad(audioContainerHolder);
-            //        //    foreach (var item in BoneMapper.startEvents)
-            //        //    {
-            //        //        GameObject aObject = new GameObject();
-            //        //        if (item[0] != "")
-            //        //        {
-            //        //            aObject.name = $"{item[0]}_AudioContainer";
-            //        //        }
-            //        //        var container = aObject.AddComponent<AudioContainer>();
-            //        //        aObject.transform.SetParent(audioContainerHolder.transform);
-            //        //        CustomEmotesAPI.audioContainers.Add(aObject);
-            //        //    }
-            //        //}
-            //    }
-            //}
+            //TODO verify there are no references to CustomEmotesAPI.localMapper cause it doesn't work in this game
         }
         catch (Exception)
         {
@@ -611,18 +579,11 @@ public class BoneMapper : MonoBehaviour
                         if (!currentClip.syncronizeAudio)
                         {
                             audioSources[currentClip.syncPos].Stop();
-                            //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                         }
-                        //audioObjects[currentClip.syncPos].transform.localPosition = new Vector3(0, -10000, 0);
 
                         if (CustomAnimationClip.syncPlayerCount[currentClip.syncPos] == 0 && currentClip.syncronizeAudio)
                         {
                             audioSources[currentClip.syncPos].Stop();
-                            //foreach (var item in allMappers)
-                            //{
-                            //    item.audioObjects[currentClip.syncPos].transform.localPosition = new Vector3(0, -10000, 0);
-                            //}
-                            //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);///COME BACK TO THIS?
                         }
                     }
                     prevClip = currentClip;
@@ -726,11 +687,11 @@ public class BoneMapper : MonoBehaviour
             }
         }
         if (currentEmoteSpot.GetComponent<EmoteLocation>().owner.worldProp)
-        {///COME BACK TO THIS?
+        {//TODO Make sync spots work with new system
             //new SyncSpotJoinedToHost(transform.parent.GetComponent<CharacterModel>().body.GetComponent<NetworkIdentity>().netId, currentEmoteSpot.transform.parent.GetComponent<NetworkIdentity>().netId, true, spot).Send(R2API.Networking.NetworkDestination.Server);
         }
         else
-        {///COME BACK TO THIS?
+        {
             //new SyncSpotJoinedToHost(transform.parent.GetComponent<CharacterModel>().body.GetComponent<NetworkIdentity>().netId, currentEmoteSpot.transform.parent.parent.GetComponent<CharacterModel>().body.GetComponent<NetworkIdentity>().netId, false, spot).Send(R2API.Networking.NetworkDestination.Server);
         }
     }
@@ -796,15 +757,12 @@ public class BoneMapper : MonoBehaviour
                 if (!currentClip.syncronizeAudio)
                 {
                     audioSources[currentClip.syncPos].Stop();
-                    //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], this.gameObject);///COME BACK TO THIS?
                 }
 
                 if (CustomAnimationClip.syncPlayerCount[currentClip.syncPos] == 0 && currentClip.syncronizeAudio)
                 {
                     audioSources[currentClip.syncPos].Stop();
-                    //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], CustomEmotesAPI.audioContainers[currentClip.syncPos]);///COME BACK TO THIS?
                 }
-                //AkSoundEngine.PostEvent(stopEvents[currentClip.syncPos][currEvent], audioObjects[currentClip.syncPos]);///COME BACK TO THIS?
             }
             if (uniqueSpot != -1 && CustomAnimationClip.uniqueAnimations[currentClip.syncPos][uniqueSpot])
             {

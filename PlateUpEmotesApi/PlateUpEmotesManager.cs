@@ -112,7 +112,6 @@ public static class PlateUpEmotesManager
                 }
             }
         }
-        //mapper.transform.parent.GetComponent<CharacterModel>().body.RecalculateStats();///COME BACK TO THIS?
 
         AnimationChanged?.Invoke(newAnimation, mapper);
         //TODO: evaluate if localMapper is necessary for this game.  

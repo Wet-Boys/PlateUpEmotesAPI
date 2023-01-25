@@ -20,6 +20,7 @@ public static class PlayerPatches
         [HarmonyPostfix]
         public static void Postfix(ref Player __instance)
         {
+            Logger.Debug($"Postfix running for CreateFromEntityPatch");
             if (__instance.State == PlayerState.Null)
                 return;
         
@@ -37,6 +38,7 @@ public static class PlayerPatches
         [HarmonyPostfix]
         public static void Postfix(ref Player __instance)
         {
+            Logger.Debug($"Postfix running for ComepleteJoiningPatch");
             if (__instance.State == PlayerState.Null)
                 return;
 
